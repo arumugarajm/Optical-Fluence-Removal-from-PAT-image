@@ -17,4 +17,4 @@ This process done with the help of NIRFAST toolbox. Already we knew mua value, n
 We knew initial pressure distribution, now assign all the acoustic properties in K-Wave toolbox and get the measured time series data.
 Take the inversion of the data we can get the K-Wave reconstructed image. This will be the input to the Deep learnig model.
 ## Deep learning model
-To remove optical fluence, we use U-Net model. The parameters are: Adam optimizer, loss function = average normalized ean squared error, batch size = 30
+To remove optical fluence, we use U-Net model. The parameters are: Adam optimizer, loss function = average normalized mean squared error, batch size = 30
