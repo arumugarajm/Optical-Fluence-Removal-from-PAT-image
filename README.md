@@ -1,7 +1,7 @@
 # Optical-Fluence-Removal-from-PAT-images
 ## Introduction
 For this project we used fundus image dataset to generate the vasculature nature for PAT images.
-Fundus image dataset is available here [Dataset](https://www.kaggle.com/linchundan/fundusimage1000).
+Fundus image datasets were available here [Dataset](https://www.kaggle.com/linchundan/fundusimage1000).
 [Datset](https://www5.cs.fau.de/research/data/fundus-images/).
 To run the Optical fulence.m file, it required im2mesh function, NIRFAST, and K-Wave toolbox.
 im2mesh function link is here [im2mesh](https://in.mathworks.com/matlabcentral/fileexchange/71772-im2mesh-2d-image-to-triangular-meshes).
