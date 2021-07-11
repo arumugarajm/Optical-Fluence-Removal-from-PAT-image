@@ -15,7 +15,7 @@ For more details refer our presentation [link for ppt](https://docs.google.com/p
 To generate dataset, the following operations were performed on fundus images. Resized,Binarized and Optical absorption coefficient of tissue value was assigned
 
 
-## Optical forward problem
+## Optical forward and inverse problem
 This process done with the help of NIRFAST toolbox. Already we knew mua value, now we have to give remaining properties to NIRFAST toolbox and the generate the Optical energy distribution
 
 
