@@ -15,11 +15,11 @@ For more details refer our presentation [link for ppt](https://docs.google.com/p
 To generate dataset, the following operations were performed on fundus images. Resized,Binarized and Optical absorption coefficient of tissue value was assigned
 
 
-## Optical forward and inverse problem
+## Optical forward problem
 This process done with the help of NIRFAST toolbox. Already we knew mua value, now we have to give remaining properties to NIRFAST toolbox and the generate the Optical energy distribution
 
 
-## Acoustic forward problem
+## Acoustic forward and inverse problem
 We knew initial pressure distribution, now assign all the acoustic properties in K-Wave toolbox and get the measured time series data.
 Take the inversion of the data we can get the K-Wave reconstructed image. This will be the input to the Deep learnig model.
 
