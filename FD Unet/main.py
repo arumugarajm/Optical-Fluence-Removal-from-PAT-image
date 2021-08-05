@@ -44,36 +44,36 @@ def DenseUNet(input_size, start_neurons, lr):
     conv5 = DenseBlock(start_neurons * 32, pool4)
 
 
-    deconv4 = Conv2DTranspose(start_neurons * 32, (3, 3), strides=(2, 2), padding="same")(conv5)
+    deconv4 = Conv2DTranspose(start_neurons * 16, (2, 2), strides=(2, 2), padding="same")(conv5)
     uconv4 = concatenate([deconv4, conv4])
     uconv4 = Conv2D(start_neurons * 8, (1, 1), activation=None, padding="same")(uconv4)
     uconv4 = BatchActivate(uconv4)
     uconv4 = DenseBlock(start_neurons * 16, uconv4)
 
 
-    deconv3 = Conv2DTranspose(start_neurons * 16, (3, 3), strides=(2, 2), padding="same")(uconv4)
+    deconv3 = Conv2DTranspose(start_neurons * 8, (2, 2), strides=(2, 2), padding="same")(uconv4)
     uconv3 = concatenate([deconv3, conv3])
     uconv3 = Conv2D(start_neurons * 4, (1, 1), activation=None, padding="same")(uconv3)
     uconv3 = BatchActivate(uconv3)
     uconv3 = DenseBlock(start_neurons * 8, uconv3)
 
-    deconv2 = Conv2DTranspose(start_neurons * 8, (3, 3), strides=(2, 2), padding="same")(uconv3)
+    deconv2 = Conv2DTranspose(start_neurons * 4, (2, 2), strides=(2, 2), padding="same")(uconv3)
     uconv2 = concatenate([deconv2, conv2])
     uconv2 = Conv2D(start_neurons * 2, (1, 1), activation=None, padding="same")(uconv2)
     uconv2 = BatchActivate(uconv2)
     uconv2 = DenseBlock(start_neurons * 4, uconv2)
     
     
-    deconv1 = Conv2DTranspose(start_neurons * 4, (3, 3), strides=(2, 2), padding="same")(uconv2)
+    deconv1 = Conv2DTranspose(start_neurons * 2, (2, 2), strides=(2, 2), padding="same")(uconv2)
     uconv1 = concatenate([deconv1, conv1])
     uconv1 = Conv2D(start_neurons * 1, (1, 1), activation=None, padding="same")(uconv1)
     uconv1 = BatchActivate(uconv1)
     uconv1 = DenseBlock(start_neurons * 2, uconv1)
 
     output_layer_noActi = Conv2D(1, (1, 1), padding="same", activation=None)(uconv1)
-    output = ReLU()(output_layer_noActi)
-    # output = Activation('sigmoid')(output_layer_noActi)
-    # output = output + X
+    output = PReLU()(output_layer_noActi)
+    # output = Activation('relu')(output_layer_noActi)
+    output = output+X
 
     model = Model(inputs=X, outputs=output)
 
