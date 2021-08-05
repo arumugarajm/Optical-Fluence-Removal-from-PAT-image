@@ -20,7 +20,7 @@ train_set_X, train_set_Y, val_set_X, val_set_Y, test_set_X, test_set_Y = read_da
 print_data_samples(train_set_X, train_set_Y)
 
 # create an instance of the U-Net model
-unet = DenseUNet(input_size=(208, 208, 1), start_neurons=32, lr=1e-4)
+unet = DenseUNet(input_size=(208, 208, 1), filters=32, lr=1e-4)
 unet.summary()
 
 
