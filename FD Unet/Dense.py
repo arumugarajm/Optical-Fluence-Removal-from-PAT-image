@@ -36,6 +36,6 @@ def DenseBlock(filters,inputs):
     result=concatenate([inputs,conv1_2, conv2_2,conv3_2,conv4_2])
     return result
 def BatchActivate(x):
-    # x = BatchNormalization()(x)
+    x = BatchNormalization()(x)
     x = Activation('relu')(x)
     return x
