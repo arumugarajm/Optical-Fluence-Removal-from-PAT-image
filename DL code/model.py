@@ -6,7 +6,7 @@ Created on Tue Jul  6 17:22:25 2021
 """
 
 import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, BatchNormalization, Conv2DTranspose, Input, concatenate, ReLU, MaxPool2D
+from tensorflow.keras.layers import Conv2D, BatchNormalization, Conv2DTranspose, Input, concatenate, ReLU, MaxPool2D, Activation
 from tensorflow.keras import Model
 from tensorflow.keras.optimizers import Adam
 import keras.backend as K
