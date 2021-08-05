@@ -27,6 +27,15 @@ def avg_log_SNR(Y_true, Y_pred):
     return tf.math.reduce_mean(20. * tf.math.log(signal / noise) / tf.math.log(10.0))
 
 
+
+def BatchActivate(Y):
+    Y = BatchNormalization()(Y)
+    Y = Activation('relu')(Y)
+    #Y = PReLU()(Y)
+    return Y
+
+
+
 def U_Net(input_size, input_channels, filters):
 
     # set up input
@@ -34,119 +43,128 @@ def U_Net(input_size, input_channels, filters):
 
     # convolution pre-processing
     Y = Conv2D(filters=filters, kernel_size=3, strides=1, padding='same')(X)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     # convolutions 1
     Y = Conv2D(filters=filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y_skip_1 = ReLU()(Y)
+    Y_skip_1 = BatchActivate(Y)
+   
+    
 
     # pooling 1
     Y = MaxPool2D(pool_size=2, strides=2, padding='valid')(Y_skip_1)
 
     # convolutions 2
     Y = Conv2D(filters=2*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=2*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y_skip_2 = ReLU()(Y)
+    Y_skip_2 = BatchActivate(Y)
+    
 
     # pooling 2
     Y = MaxPool2D(pool_size=2, strides=2, padding='valid')(Y_skip_2)
 
     # convolutions 3
     Y = Conv2D(filters=4*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
-
+    Y = BatchActivate(Y)
+    
+    
     Y = Conv2D(filters=4*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y_skip_3 = ReLU()(Y)
+    Y_skip_3 = BatchActivate(Y)
+   
 
     # pooling 3
     Y = MaxPool2D(pool_size=2, strides=2, padding='valid')(Y_skip_3)
 
     # convolutions 4
     Y = Conv2D(filters=8*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=8*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y_skip_4 = ReLU()(Y)
+    Y_skip_4 = BatchActivate(Y)
+    
 
     # pooling 4
     Y = MaxPool2D(pool_size=2, strides=2, padding='valid')(Y_skip_4)
 
     # convolutions 5
     Y = Conv2D(filters=16*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=16*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
-   ### # upconvolution and concatenation 1
+    # upconvolution and concatenation 1
     Y = Conv2DTranspose(filters=8*filters, kernel_size=2, strides=2, padding='valid')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = concatenate([Y_skip_4, Y])
 
     # convolutions 6
     Y = Conv2D(filters=8*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=8*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     # upconvolution and concatenation 2
     Y = Conv2DTranspose(filters=4*filters, kernel_size=2, strides=2, padding='valid')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
+    
 
     Y = concatenate([Y_skip_3, Y])
+    
 
     # convolutions 7
     Y = Conv2D(filters=4*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=4*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     # upconvolution and concatenation 3
     Y = Conv2DTranspose(filters=2*filters, kernel_size=2, strides=2, padding='valid')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = concatenate([Y_skip_2, Y])
 
     # convolutions 8
     Y = Conv2D(filters=2*filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=2*filters, kernel_size=3, strides=1, padding='same')(Y)
-    # Y = BatchNormalization()(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     # upconvolution and concatenation 4
     Y = Conv2DTranspose(filters=filters, kernel_size=2, strides=2, padding='valid')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = concatenate([Y_skip_1, Y])
 
     # convolutions 9
     Y = Conv2D(filters=filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     Y = Conv2D(filters=filters, kernel_size=3, strides=1, padding='same')(Y)
-    Y = ReLU()(Y)
+    Y = BatchActivate(Y)
 
     # convolution post-processing
     Y = Conv2D(filters=input_channels, kernel_size=1, strides=1, padding='same')(Y)
 
-
+    # final concatenation and convolution
+    Y = X+Y
 
     # set up model and compile
     model = Model(inputs=X, outputs=Y)
-    model.compile(optimizer=Adam(lr=0.0001), loss=avg_NSR, metrics=[avg_log_SNR])
-    model.summary()
+    model.compile(optimizer=Adam(lr=0.001), loss=avg_NSR, metrics=[avg_log_SNR])
+    # model.summary()
+    
 
-
+    # return model
     return model
 
 
