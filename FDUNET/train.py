@@ -6,7 +6,7 @@ Created on Tue Jul  6 17:25:52 2021
 """
 
 import tensorflow as tf
-from Unet import Unet
+from main import DenseUNet
 from read import read_data, print_data_samples, print_model_outputs
 from tensorflow.keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
@@ -19,8 +19,10 @@ X1,X2,X3,Z1,Z2,Z3 = read_data(path)
 print_data_samples(X1, Z1)
 
 # create the U-Net model
-input_size = (208, 208, 1)
-model = Unet(input_size)
+input_size = (256, 256, 1)
+filters = 32
+lr =  1e-4
+model = DenseUNet(input_size, filters, lr)
 
 
 # set up checkpoint
@@ -28,7 +30,7 @@ checkpoint = ModelCheckpoint(filepath='./model_checkpoints/', save_best_only=Tru
 # checkpoint = ModelCheckpoint(filepath='./model_checkpoints/', save_best_only=True, save_weights_only=True, monitor='val_avg_log_SNR', mode='max', verbose=1)
 
 # train the model
-history = model.fit(x=X1, y=Z1, validation_data=(X2, Z2), batch_size=2, epochs=1, callbacks=[checkpoint])
+history = model.fit(x=X1, y=Z1, validation_data=(X2, Z2), batch_size=15, epochs=60, callbacks=[checkpoint])
 
 # # print the learning curve and the progress of average logSNR
 # plt.plot(history.history['avg_log_SNR'])
@@ -67,8 +69,8 @@ model.load_weights('./model_checkpoints/')
 # check the performance of unet on the testing set
 y_pred = model.predict(X3)
 # print('average PSNRLoss of U-Net on the testing set: {}'.format(avg_log_SNR(test_set_Y, y_pred).numpy()))
-print('average PSNRLoss of U-Net on the testing set: {}'.format(tf.math.reduce_mean(tf.image.psnr(Z3, y_pred, 1.)).numpy()))
-print('average SSIM of U-Net on the testing set: {}'.format(tf.math.reduce_mean(tf.image.ssim(Z3, y_pred, 1.)).numpy()))
+print('average PSNRLoss of FD U-Net on the testing set: {}'.format(tf.math.reduce_mean(tf.image.psnr(Z3, y_pred, 1.)).numpy()))
+print('average SSIM of FD U-Net on the testing set: {}'.format(tf.math.reduce_mean(tf.image.ssim(Z3, y_pred, 1.)).numpy()))
 
 # check the performance of Input on the testing set
 # print('average PSNRLoss of Input on the testing set: {}'.format(avg_log_SNR(test_set_Y, test_set_X).numpy()))
@@ -83,5 +85,4 @@ print_model_outputs(model, X2[:4], Z2[:4], 'Validation Data')
 
 # print few results of outputs of the model on the testing set
 print_model_outputs(model, X3[:4], Z3[:4], 'Testing Data')
-
 
