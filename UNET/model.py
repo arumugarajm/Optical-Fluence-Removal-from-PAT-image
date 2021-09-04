@@ -135,30 +135,30 @@ def ResUnet(image_size,channels):
     
     ## Encoder
     e0 = inputs
-    e1 = stem(e0, f[0])
-    e2 = residual_block(e1, f[1], strides=2)
-    e3 = residual_block(e2, f[2], strides=2)
-    e4 = residual_block(e3, f[3], strides=2)
-    e5 = residual_block(e4, f[4], strides=2)
+    e1 = stem(e0, f[0]) # 256, 256, 16
+    e2 = residual_block(e1, f[1], strides=2)#128, 128, 32
+    e3 = residual_block(e2, f[2], strides=2)#64, 64, 64
+    e4 = residual_block(e3, f[3], strides=2)#32, 32, 128
+    e5 = residual_block(e4, f[4], strides=2)#16, 16, 256
     
     ## Bridge
-    b0 = conv_block(e5, f[4], strides=1)
-    b1 = conv_block(b0, f[4], strides=1)
+    b0 = conv_block(e5, f[4], strides=1)#16, 16, 256
+    b1 = conv_block(b0, f[4], strides=1)#16, 16, 256
     
     ## Decoder
     u1 = upsample_concat_block(b1, e4)
-    d1 = residual_block(u1, f[4])
+    d1 = residual_block(u1, f[4])#(None, 32, 32, 384) (None, 32, 32, 256)
     
     u2 = upsample_concat_block(d1, e3)
-    d2 = residual_block(u2, f[3])
+    d2 = residual_block(u2, f[3])#(None, 64, 64, 320) (None, 64, 64, 128)
     
     u3 = upsample_concat_block(d2, e2)
-    d3 = residual_block(u3, f[2])
+    d3 = residual_block(u3, f[2])#(None, 128, 128, 160) (None, 128, 128, 64)
     
     u4 = upsample_concat_block(d3, e1)
-    d4 = residual_block(u4, f[1])
+    d4 = residual_block(u4, f[1])#(None, 256, 256, 80) (None, 256, 256, 32)
     
-    outputs = Conv2D(1, (1, 1), padding="same", activation="relu")(d4)
+    outputs = Conv2D(1, (1, 1), padding="same", activation="relu")(d4)#None, 256, 256, 1
     model = Model(inputs, outputs)
     model.compile(optimizer=Adam(lr = 1e-4), loss='mse', metrics=['mse'])
     return model
