@@ -37,7 +37,7 @@ def BatchActivate(x, act=True):
     return x
 
 def conv_block(x, filters, kernel_size=(3, 3), padding="same", strides=1):
-    conv = BatchActivatebn_act(x)
+    conv = BatchActivate(x)
     conv = Conv2D(filters, kernel_size, padding=padding, strides=strides)(conv)
     return conv
 
