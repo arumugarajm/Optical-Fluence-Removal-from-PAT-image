@@ -30,14 +30,14 @@ def avg_log_SNR(Y_true, Y_pred):
 ####### predefined layers for the model creation #######################
 
 
-def bn_act(x, act=True):
+def BatchActivate(x, act=True):
     x = BatchNormalization()(x)
     if act == True:
         x = Activation("relu")(x)
     return x
 
 def conv_block(x, filters, kernel_size=(3, 3), padding="same", strides=1):
-    conv = bn_act(x)
+    conv = BatchActivatebn_act(x)
     conv = Conv2D(filters, kernel_size, padding=padding, strides=strides)(conv)
     return conv
 
@@ -46,7 +46,7 @@ def stem(x, filters, kernel_size=(3, 3), padding="same", strides=1):
     conv = conv_block(conv, filters, kernel_size=kernel_size, padding=padding, strides=strides)
     
     shortcut = Conv2D(filters, kernel_size=(1, 1), padding=padding, strides=strides)(x)
-    shortcut = bn_act(shortcut, act=False)
+    shortcut = BatchActivate(shortcut, act=False)
     
     output = Add()([conv, shortcut])
     return output
@@ -56,7 +56,7 @@ def residual_block(x, filters, kernel_size=(3, 3), padding="same", strides=1):
     res = conv_block(res, filters, kernel_size=kernel_size, padding=padding, strides=1)
     
     shortcut = Conv2D(filters, kernel_size=(1, 1), padding=padding, strides=strides)(x)
-    shortcut = bn_act(shortcut, act=False)
+    shortcut = BatchActivate(shortcut, act=False)
     
     output = Add()([shortcut, res])
     return output
