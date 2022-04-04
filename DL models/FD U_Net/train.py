@@ -100,15 +100,10 @@ print('Time1: ',time_taken1)
 
 ############ check the performance of Output on the testing set ###############
 print('average PSNRLoss of FD U-Net on the testing set: {}'.format(tf.math.reduce_mean(tf.image.psnr(Z3, y_pred, 1.)).numpy()))
-print('variance PSNR of FD U-Net on the testing set: {}'.format(tf.math.reduce_variance(tf.image.psnr(Z3, y_pred, 1.)).numpy()))
 print('average SSIM of FD U-Net on the testing set: {}'.format(tf.math.reduce_mean(tf.image.ssim(Z3, y_pred, 1.)).numpy()))
-print('variance SSIM of FD U-Net on the testing set: {}'.format(tf.math.reduce_variance(tf.image.ssim(Z3, y_pred, 1.)).numpy()))
-
 ############ check the performance of Input on the testing set ###############
 print('average PSNRLoss of Input on the testing set: {}'.format(tf.math.reduce_mean(tf.image.psnr(Z3, X3, 1.)).numpy()))
-print('variance PSNR of Input on the testing set: {}'.format(tf.math.reduce_variance(tf.image.psnr(Z3, X3, 1.)).numpy()))
 print('average SSIM of Input on the testing set: {}'.format(tf.math.reduce_mean(tf.image.ssim(Z3, X3, 1.)).numpy()))
-print('variance SSIM of Input on the testing set: {}'.format(tf.math.reduce_variance(tf.image.ssim(Z3, X3, 1.)).numpy()))
 
 
 
