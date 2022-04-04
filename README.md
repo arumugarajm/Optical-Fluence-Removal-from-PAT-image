@@ -8,6 +8,7 @@ im2mesh function link is here [im2mesh](https://in.mathworks.com/matlabcentral/f
 NIRFAST toolbox link is here [NIRAST](https://milab.host.dartmouth.edu/nirfast/).
 K-Wave toolbox link is here [K-Wave](http://www.k-wave.org/).
 For binarization operation we need binarization matlab files.
+DL models directory has all the Deep learning models(U-Net, FD U-Net, Y-Net, FD Y-Net, Deep ResU-Net, and GAN).
 For more details refer our presentation [link for ppt](https://docs.google.com/presentation/d/11RDKK24GpVCmXNCmAEXCF1me9gWeFw93/edit#slide=id.p1). For any questions mail me: arumugaraj.m@gmail.com
 
 
