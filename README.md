@@ -26,4 +26,4 @@ Take the inversion of the data we can get the K-Wave reconstructed image. This w
 
 
 ## Deep learning model
-To remove optical fluence, we used U-Net model. The parameters are: Adam optimizer, loss function = average normalized mean squared error, batch size = 6
+To remove optical fluence, we used different DL models. The parameters and hyperparameters are: Adam optimizer, loss function = average normalized mean squared error, batch size = 6
