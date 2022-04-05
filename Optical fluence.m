@@ -1,5 +1,5 @@
 clear; 
-Images = dir('/media/fistlab/DATA/Raj/Dataset/0/*.JPG'); % Find all jpg files in current directory.
+Images = dir('/media/fistlab/DATA/Raj/Dataset/0/*.JPG'); % read all fundus image dataset from the directory % Find all jpg files in current directory.
 
 for k=1:length(Images)
     baseFileName = Images(k).name;
