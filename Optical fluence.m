@@ -344,15 +344,15 @@ elseif(D4n(i)<D1n(i))&&(D4n(i)<D2n(i))&&(D4n(i)<D3n(i))
 end
 
 addpath('../k_wave_PAT_CODE/k-wave-toolbox-version-1.3/k-Wave');
-medium.sound_speed = 1500;  % [m/s]
+medium.sound_speed = 1540;  % [m/s]
 % create the time array
 time.dt = 5e-8;         % sampling time in sec 5e-8
 time.length = 500;      % number of points in time
 
-object_sim.Nx = 1001;  % number of grid points in the x (row) direction
-object_sim.Ny = 1001;  % number of grid points in the y (column) direction
-object_sim.x = 100.1e-3;              % total grid size [m]
-object_sim.y = 100.1e-3;              % total grid size [m]
+object_sim.Nx = 801;  % number of grid points in the x (row) direction
+object_sim.Ny = 801;  % number of grid points in the y (column) direction
+object_sim.x = 80.1e-3;              % total grid size [m]
+object_sim.y = 80.1e-3;              % total grid size [m]
 
 dx = object_sim.x/object_sim.Nx;              % grid point spacing in the x direction [m]
 dy = object_sim.y/object_sim.Ny;              % grid point spacing in the y direction [m]
@@ -360,28 +360,29 @@ kgrid = makeGrid(object_sim.Nx, dx, object_sim.Ny, dy);
 
 % create a second computation grid for the reconstruction to avoid the
 % inverse crime
-object_rec.Nx = 501;  % number of grid points in the x (row) direction
-object_rec.Ny = 501;  % number of grid points in the y (column) direction
-object_rec.x = 50.1e-3;              % total grid size [m]
-object_rec.y = 50.1e-3;              % total grid size [m]
+object_rec.Nx = (1/2)*(object_sim.Nx-1)+1;    % number of grid points in the x (row) direction
+object_rec.Ny = (1/2)*(object_sim.Ny-1)+1;    % number of grid points in the y (column) direction
+object_rec.x = (object_sim.x);              % total grid size [m]
+object_rec.y = (object_sim.y);              % total grid size [m]
 
-dx_rec = object_rec.x/object_rec.Nx;              % grid point spacing in the x direction [m]
-dy_rec = object_rec.y/object_rec.Ny;              % grid point spacing in the y direction [m]
+dx_rec = (object_rec.x/(object_rec.Nx-1));               % grid point spacing in the x direction [m]
+dy_rec = (object_rec.y/(object_rec.Ny-1));              % grid point spacing in the y direction [m]
 recon_grid = makeGrid(object_rec.Nx, dx_rec, object_rec.Ny, dy_rec);
+
 
 % define a centered Cartesian circular sensor
 clear sensor;
-sensor_radius = 25e-3;     % [m]
+sensor_radius = 19e-3;     % [m]
 sensor_angle = 2*pi;      % [rad]
 sensor_pos = [0, 0];        % [m]
 num_sensor_points = 256;
 cart_sensor_mask = makeCartCircle(sensor_radius, num_sensor_points, sensor_pos, sensor_angle);
 sensor.mask = cart_sensor_mask;
-center_freq = 2.628e6;      % [Hz]
-bandwidth = 61;        % [%]
+center_freq = 5e6;      % [Hz]
+bandwidth = 90;        % [%]
 sensor.frequency_response = [center_freq, bandwidth];
-M = 104;
-N = 104;
+M = 128;
+N = 128;
 indxi = ceil(object_sim.Nx/2) - M:ceil(object_sim.Nx/2) + M-1;
 indyi = ceil(object_sim.Ny/2) - N:ceil(object_sim.Ny/2) + N-1;
 
@@ -423,7 +424,8 @@ sensor.mask = binary_sensor_mask;
 sdn2_interp = interpCartData(recon_grid, sdn2, cart_sensor_mask, binary_sensor_mask);
 IM2_k_interp = inverse(object_rec, time, medium, sensor, sdn2_interp);
 % figure;imshow(IM2_k_interp,[]);%title('new image');
-Xi=IM2_k_interp(147:354,147:354);
+Xi1=IM2_k_interp((indxi(1))/2:(indxi(end))/2, (indyi(1))/2:(indyi(end))/2); # Cropp the reconstructed image
+Xi = imresize(Xi1,[256,256]);
 % figure;imshow(Xi,[]);
 
 
