@@ -5,7 +5,7 @@ for k=1:length(Images)
     baseFileName = Images(k).name;
     fullFileName = fullfile(Images(k).folder, baseFileName);
     Img = imread(fullFileName);
-    sz=208;
+    sz=256;
     I = imresize(Img, [sz,sz]);%resize the input image
     input = rgb2gray(I);%change the input image into gray image
     [rowim,colim]=size(input);
@@ -14,10 +14,10 @@ for k=1:length(Images)
 %     figure, imshow(segmented_image);
     S = imcomplement(segmented_image);%generate complement of binary image
 
-%     r1 = 0.01 + (0.02-0.01)*rand(rowim,rowim); %create a random matrix of size 200X200 between 0.5-0.6
+%     r1 = 0.03 + (0.0438-0.03)*rand(rowim,rowim); %create a random matrix of size 200X200 between 0.5-0.6
 %     r2 = 0.0005 + (0.0008-0.0005)*rand(rowim,rowim);%create a random matrix of size 200X200 between 0.01-0.02
     r1 = 0.03 + (0.04-0.03)*rand(rowim,rowim); %create a random matrix of size 200X200 between 0.5-0.6
-    r2 = 0.0015 + (0.002-0.0015)*rand(rowim,rowim);%create a random matrix of size 200X200 between 0.01-0.02
+    r2 = 0 + (0.001-0)*rand(rowim,rowim);%create a random matrix of size 200X200 between 0.01-0.02
     
 
     x1=segmented_image.*r1;%generate random nature for vasculature
