@@ -2,7 +2,7 @@ close all;
 clear;
 clc
 
-myFolder = '..\project\Dataset\1000images\0\Images';
+myFolder = '..\project\Dataset\1000images\0\Images'; % here give the directory of your fundus images
 filePattern = fullfile(myFolder, '**/*.JPG');
 theFiles = dir(filePattern);
 for k = 1:length(theFiles)
@@ -27,5 +27,5 @@ for k = 1:length(theFiles)
 %     x1=segmented_image.*r1;%generate random nature for vasculature
 %     x2=S.*r2;%generate random nature for background
 %     Xim=x1+x2;%add both the random nature to get the final image
-    save(['C:\Users\arumugaraj\Desktop\New folder\New folder\X_' num2str(k) '.mat'],'segmented_image');
+    save(['C:\Users\arumugaraj\Desktop\New folder\New folder\X_' num2str(k) '.mat'],'segmented_image'); % store binary images as .mat file
 end
