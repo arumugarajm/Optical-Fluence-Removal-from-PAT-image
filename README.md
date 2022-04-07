@@ -30,7 +30,12 @@ To remove optical fluence, we used different DL models. The parameters and hyper
 
 ## How to use codes
 ### Step 1: Generation of binary phantom
-For 2D, first generate binary images from Fundus images by using Binarization matlab files. This flie has 4 matlab files, here binary.m conatin code for binarazation and the remaining files are supporting to this main program. For 3D just remove unnecessary tissues from the original phantom, this can be done by using simple for loop and change all tissue values.
+For 2D, first generate binary images from Fundus images by using Binarization matlab files. This flie has 4 matlab files, here binary.m conatin code for binarazation and the remaining files are supporting to this main program. Note: this step can skip if we directly use step 2.
 ### Step 2: Genearation of realistic phantom and forward optical, forward and inverse acoustic models
-For 2D, fluence affected images can be generated simply by running Optical fluence.m file, to run this code we need some supporting codes from Binarization matlab files (imoverlay.m,isodat.m,segmentRetina.m),forward.m,inverse.m,NIRFAST toolbox. 
+For 2D, fluence affected images can be generated simply by running Optical fluence.m file, to run this code we need some supporting codes from Binarization matlab files (imoverlay.m,isodat.m,segmentRetina.m),forward.m,inverse.m,NIRFAST toolbox.
+For 3D, fluence affected images can be generated simply by running opticalfluence3D.m file and remove unnecessary tissues from the original phantom, this can be done by using simple for loop and change all tissue values.
+Store all the images (2D and 3D) as 2D mat files to use for DL models. Note, 3D volume image must convert to 2D slice to avoid limited number of dataset.
+### Step 3: Train, Validate, and Test DL models or removal of fluence effect using DL models:
+DL models directory has all the DL models. Split the dataset into two folders, one should have 90% of total data and other have 10% of total data, do data-augmentaion. Run train.py to train and store best weight of the model and load these weights to test the DL model performance.
+
 
