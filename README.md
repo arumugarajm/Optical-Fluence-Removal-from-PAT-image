@@ -42,12 +42,4 @@ Store all the images (2D and 3D) as 2D mat files to use for DL models. Note, 3D 
 DL models directory has all the DL models. Split the dataset into two folders, one should have 90% of total data and other have 10% of total data, do data-augmentaion. Run train.py to train and store best weight of the model and load these weights to test the DL model performance.
 
 
-## Important links
-[im2mesh](https://in.mathworks.com/matlabcentral/fileexchange/71772-im2mesh-2d-image-to-triangular-meshes)
-[iso2mesh](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi)
-[mesh2d-master](https://in.mathworks.com/matlabcentral/fileexchange/25555-mesh2d-delaunay-based-unstructured-mesh-generation)
-[NIRAST](https://milab.host.dartmouth.edu/nirfast/)
-[K-Wave](http://www.k-wave.org/)
-
-
 
