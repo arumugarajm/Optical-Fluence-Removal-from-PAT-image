@@ -1,10 +1,11 @@
 # Optical-Fluence-Removal-from-PAT-images
 ## Introduction
-For this project we used fundus image dataset to generate the vasculature nature for PAT images.
+For 2D model we used fundus image dataset to generate the vasculature nature for PAT images.
 Fundus image datasets are available here [Dataset 1](https://www.kaggle.com/linchundan/fundusimage1000).
-[Datset 2](https://www5.cs.fau.de/research/data/fundus-images/). For 3D model we collected online datasets from the following links [Dataset 1](https://anastasio.bioengineering.illinois.edu/downloadable-content/oa-breast-database/) and [Dataset 2](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KBYQQ7).
+[Datset 2](https://www5.cs.fau.de/research/data/fundus-images/). 
 For 2D model run the Optical fulence.m file, it required im2mesh function, NIRFAST, and K-Wave toolbox this file has optical forward problem, acoustic forward and inverse problem solution in 2D.
-im2mesh function link is here [im2mesh](https://in.mathworks.com/matlabcentral/fileexchange/71772-im2mesh-2d-image-to-triangular-meshes), which is used to generate 2D mesh. For 3D model run 3D for acoustic phantom file this file has optical forward problem, acoustic forward and inverse problem solution for 3D. iso2mesh function can download from this link [iso2mesh](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi), which is used to generate 3D mesh.
+im2mesh function link is here [im2mesh](https://in.mathworks.com/matlabcentral/fileexchange/71772-im2mesh-2d-image-to-triangular-meshes), which is used to generate 2D mesh. For 3D model we collected online datasets from the following links [Dataset 1](https://anastasio.bioengineering.illinois.edu/downloadable-content/oa-breast-database/) and [Dataset 2](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KBYQQ7).
+For 3D model run 3D for acoustic phantom file this file has optical forward problem, acoustic forward and inverse problem solution for 3D. iso2mesh function can download from this link [iso2mesh](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi), which is used to generate 3D mesh.
 NIRFAST toolbox link is here [NIRAST](https://milab.host.dartmouth.edu/nirfast/).
 K-Wave toolbox link is here [K-Wave](http://www.k-wave.org/).
 For binarization operation we need binarization matlab files.
@@ -13,11 +14,11 @@ For more details refer our presentation [link for ppt](https://docs.google.com/p
 
 
 ## Dataset preparation
-To generate dataset, the following operations were performed on fundus images. Resized,Binarized and Optical absorption coefficient of tissue value was assigned
+To generate dataset, the following operations were performed on fundus images. Resized,Binarized and Optical absorption coefficient of tissue value was assigned.
 
 
 ## Optical forward problem
-This process done with the help of NIRFAST toolbox. Already we knew mua value, now we have to give remaining properties to NIRFAST toolbox and the generate the Optical energy distribution
+This process done with the help of NIRFAST toolbox. Already we knew mua value, now we have to give remaining properties to NIRFAST toolbox and the generate the Optical energy distribution.
 
 
 ## Acoustic forward and inverse problem
@@ -31,7 +32,7 @@ To remove optical fluence, we used different DL models. The parameters and hyper
 ## How to use codes
 ### Step 1: Generation of binary phantom
 For 2D, first generate binary images from Fundus images by using Binarization matlab files. This flie has 4 matlab files, here binary.m conatin code for binarazation and the remaining files are supporting to this main program. Note: this step can skip if we directly use step 2.
-### Step 2: Genearation of realistic phantom and forward optical, forward and inverse acoustic models
+### Step 2: Genearation of realistic phantom and forward optical, forward and inverse acoustic models or fluence corrupted image generation
 For 2D, fluence affected images can be generated simply by running Optical fluence.m file, to run this code we need some supporting codes from Binarization matlab files (imoverlay.m,isodat.m,segmentRetina.m),forward.m,inverse.m,NIRFAST toolbox.
 For 3D, fluence affected images can be generated simply by running opticalfluence3D.m file and remove unnecessary tissues from the original phantom, this can be done by using simple for loop and change all tissue values.
 Store all the images (2D and 3D) as 2D mat files to use for DL models. Note, 3D volume image must convert to 2D slice to avoid limited number of dataset.
