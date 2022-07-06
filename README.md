@@ -12,7 +12,7 @@ For 3D model, use 3D directory and run opticalfluence3D.m file & this file has o
  iso2mesh function can download from this link [iso2mesh](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi), which is used to generate 3D mesh and also we need open-source K-Wave and NIRFAST toolboxes and the link is given above. 
 ## DL model:
 DL models directory has all the Deep learning models(U-Net, FD U-Net, Y-Net, FD Y-Net, Deep ResU-Net, and GAN).
-For more details refer our presentation [link for ppt](https://drive.google.com/drive/u/0/my-drive). For any questions mail me: arumugaraj.m@gmail.com
+For more details refer our presentation [link for ppt](https://docs.google.com/document/d/10aMYhCaSh42JCJN-5XCa0LroZB0-yOO04gzaahiCZ0s/edit). For any questions mail me: arumugaraj.m@gmail.com
 
 
 ## Dataset preparation
