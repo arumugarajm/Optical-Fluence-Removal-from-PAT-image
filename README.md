@@ -12,7 +12,7 @@ For 3D model, use 3D directory and run opticalfluence3D.m file & this file has o
  iso2mesh function can download from this link [iso2mesh](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi), which is used to generate 3D mesh and also we need open-source K-Wave and NIRFAST toolboxes and the link is given above. 
 ## DL model:
 DL models directory has all the Deep learning models(U-Net, FD U-Net, Y-Net, FD Y-Net, Deep ResU-Net, and GAN).
-For more details refer our presentation [link for ppt](https://docs.google.com/presentation/d/11RDKK24GpVCmXNCmAEXCF1me9gWeFw93/edit#slide=id.p1). For any questions mail me: arumugaraj.m@gmail.com
+For more details refer our presentation [link for ppt]([https://docs.google.com/presentation/d/11RDKK24GpVCmXNCmAEXCF1me9gWeFw93/edit#slide=id.p1](https://drive.google.com/drive/u/0/my-drive)). For any questions mail me: arumugaraj.m@gmail.com
 
 
 ## Dataset preparation
@@ -39,7 +39,7 @@ For 2D, fluence affected images can be generated simply by running Optical fluen
 For 3D, fluence affected images can be generated simply by running opticalfluence3D.m file and remove unnecessary tissues from the original phantom, this can be done by using simple for loop and change all tissue values.
 Store all the images (2D and 3D) as 2D mat files to use for DL models. Note, 3D volume image must convert to 2D slice to avoid limited number of dataset.
 ### Step 3: Train, Validate, and Test DL models or removal of fluence effect using DL models:
-DL models directory has all the DL models. Split the dataset into two folders, one should have 90% of total data and other have 10% of total data, do data-augmentaion. Run train.py to train and store best weight of the model and load these weights to test the DL model performance.
+DL models directory has all the DL models. Split the dataset into three parts, 80% used for training, 10% used for validation, 10% used for testing the DL models. Run train.py to train and store best weight of the model and load these weights to test the DL model performance.
 
 
 
