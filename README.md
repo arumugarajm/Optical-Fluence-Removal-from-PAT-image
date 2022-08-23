@@ -20,16 +20,16 @@ The DL models directory has all the Deep Learning models(U-Net, FD U-Net, Y-Net,
 
 
 ## Dataset preparation
-To generate dataset, the following operations were performed on fundus images. Resized,Binarized and Optical absorption coefficient of tissue value was assigned.
+To generate a dataset, the following operations were performed on fundus images. The resized, binarized, and optical absorption coefficient of tissue value were assigned.
 
 
 ## Optical forward problem
-This process done with the help of NIRFAST toolbox. Already we knew mua value, now we have to give remaining properties to NIRFAST toolbox and the generate the Optical energy distribution.
+This process is done with the help of the NIRFAST toolbox. We already knew the mua value. Now we have to give the remaining properties to the NIRFAST toolbox and generate the optical energy distribution.
 
 
 ## Acoustic forward and inverse problem
-We knew initial pressure distribution, now assign all the acoustic properties in K-Wave toolbox and get the measured time series data.
-Take the inversion of the data we can get the K-Wave reconstructed image. This will be the input to the Deep learnig model.
+We know the initial pressure distribution. Now we assign all the acoustic properties in the K-Wave toolbox and get the measured time series data. 
+With the inversion of the data, we can get the K-Wave reconstructed image. This will be the input to the deep learning model.
 
 
 ## Deep learning model
@@ -37,13 +37,13 @@ To remove optical fluence, we used different DL models. The parameters and hyper
 
 ## How to use codes
 ### Step 1: Generation of binary phantom
-For 2D, first generate binary images from Fundus images by using Binarization matlab files. This file has 4 matlab files, here binary.m conatin code for binarazation and the remaining files are supporting to this main program. Note: this step can skip if we directly follow the next step.
+For 2D, first generate binary images from Fundus images by using Binarization Matlab files. This file has 4 matlab files. Here binary.m contains code for binarazation and the remaining files support this main program. Note: this step can be skipped if we directly follow the next step.
 ### Step 2: Generation of realistic phantom and forward optical, forward and inverse acoustic models or fluence corrupted image generation
-For 2D, fluence affected images can be generated simply by running Optical fluence.m file, to run this code we need some supporting codes from Binarization matlab files (imoverlay.m,isodat.m,segmentRetina.m),forward.m,inverse.m,NIRFAST toolbox.
-For 3D, fluence affected images can be generated simply by running opticalfluence3D.m file and remove unnecessary tissues from the original phantom, this can be done by using simple for loop and change all tissue values.
-Store all the images (2D and 3D) as 2D mat files to use for DL models. Note, 3D volume image must convert to 2D slice to avoid limited number of dataset.
+For 2D, fluence affected images can be generated simply by running the Optical fluence.m file. To run this code we need some supporting codes from Binarization matlab files (imoverlay.m,isodat.m,segmentRetina.m),forward.m, inverse.m, and NIRFAST toolbox. 
+For 3D, fluence affected images can be generated simply by running the opticalfluence3D.m file and removing unnecessary tissues from the original phantom. This can be done by using a simple for loop and changing all tissue values. 
+Store all the images (2D and 3D) as 2D mat files to use for DL models. To avoid a limited number of datasets, a 3D volume image must be converted to a 2D slice. 
 ### Step 3: Train, Validate, and Test DL models or removal of fluence effect using DL models:
-DL models directory has all the DL models. Split the dataset into three parts, 80% used for training, 10% used for validation, 10% used for testing the DL models. Run train.py to train and store best weight of the model and load these weights to test the DL model performance.
+The DL models directory has all the DL models. Split the dataset into three parts, 80% used for training, 10% used for validation, and 10% used for testing the DL models. Run train. py to train and store the best weight of the model and load these weights to test the DL model's performance.
 
 
 
