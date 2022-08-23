@@ -1,12 +1,15 @@
 # Optical-Fluence-Removal-from-PAT-images
 ## Introduction
+
 ## 2D model:
-For 2D model, use 2D directory and run the Optical fulence.m file, it required im2mesh function, NIRFAST, and K-Wave toolbox & this file has optical forward problem, acoustic forward and inverse problem solution in 2D.
-For 2D model we used fundus image dataset to generate the vasculature nature for PAT images.
+For 2D models, use the 2D directory and run the Optical fulence.m file, it requires im2mesh function, NIRFAST, and K-Wave toolbox. This file has optical forward problem, acoustic forward and acoustic inverse problem solutions in 2D.
+For the 2D model, we used fundus image dataset to generate the vasculature nature for PAT images.
 Fundus image datasets are available in online [Dataset 1](https://www.kaggle.com/linchundan/fundusimage1000).
 [Datset 2](https://www5.cs.fau.de/research/data/fundus-images/). 
-im2mesh function link is here [im2mesh](https://in.mathworks.com/matlabcentral/fileexchange/71772-im2mesh-2d-image-to-triangular-meshes), which is used to generate 2D mesh & also addpath for [mesh2d-master](https://in.mathworks.com/matlabcentral/fileexchange/25555-mesh2d-delaunay-based-unstructured-mesh-generation).NIRFAST toolbox link is here [NIRAST](https://milab.host.dartmouth.edu/nirfast/).
-K-Wave toolbox link is here [K-Wave](http://www.k-wave.org/).
+im2mesh function link is here [im2mesh](https://in.mathworks.com/matlabcentral/fileexchange/71772-im2mesh-2d-image-to-triangular-meshes), which is used to generate 2D mesh & also addpath for [mesh2d-master](https://in.mathworks.com/matlabcentral/fileexchange/25555-mesh2d-delaunay-based-unstructured-mesh-generation). The NIRFAST toolbox link is here: [NIRAST](https://milab.host.dartmouth.edu/nirfast/).
+K-Wave toolbox link is here: [K-Wave](http://www.k-wave.org/).
+
+
 ## 3D model:
 For 3D model, use 3D directory and run opticalfluence3D.m file & this file has optical forward problem, acoustic forward and inverse problem solution for 3D.For 3D model we collected online datasets from the following links [Dataset 1](https://anastasio.bioengineering.illinois.edu/downloadable-content/oa-breast-database/) and [Dataset 2](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KBYQQ7).
  iso2mesh function can download from this link [iso2mesh](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi), which is used to generate 3D mesh and also we need open-source K-Wave and NIRFAST toolboxes and the link is given above. 
