@@ -16,8 +16,7 @@ The iso2mesh function can be download from this link [iso2mesh](http://iso2mesh.
 
 
 ## DL model:
-DL models directory has all the Deep learning models(U-Net, FD U-Net, Y-Net, FD Y-Net, Deep ResU-Net, and GAN).
-For more details refer our presentation [link for ppt](https://docs.google.com/document/d/10aMYhCaSh42JCJN-5XCa0LroZB0-yOO04gzaahiCZ0s/edit). For any questions mail me: arumugaraj.m@gmail.com
+The DL models directory has all the Deep Learning models(U-Net, FD U-Net, Y-Net, FD Y-Net, Deep ResU-Net, and GAN). For more details, refer to our presentation [link for ppt](https://docs.google.com/document/d/10aMYhCaSh42JCJN-5XCa0LroZB0-yOO04gzaahiCZ0s/edit).  If you have any questions, please contact me at: arumugaraj.m@gmail.com
 
 
 ## Dataset preparation
